@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PickAndPlant – Business Model Canvas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-dark: #1a3a2a;
+    --green-mid: #2d6a4f;
+    --green-light: #52b788;
+    --cream: #f5f0e8;
+    --sand: #e8dcc8;
+    --earth: #a07850;
+    --leaf: #95d5b2;
+    --accent: #d4a853;
+    --text-dark: #1a1a14;
+    --text-mid: #3d3d30;
+  }
+
+  body {
+    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-dark);
+    min-height: 100vh;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* Decorative background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 40% at 10% 20%, rgba(82,183,136,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 90% 80%, rgba(45,106,79,0.10) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  /* Header */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--green-light);
+  }
+
+  .logo-area { display: flex; align-items: center; gap: 14px; }
+
+  .leaf-icon {
+    width: 48px; height: 48px;
+    background: var(--green-mid);
+    border-radius: 50% 50% 50% 10%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    rotate: -20deg;
+    box-shadow: 0 4px 16px rgba(45,106,79,0.3);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 900;
+    color: var(--green-dark);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+
+  h1 span { color: var(--green-light); }
+
+  .subtitle {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--earth);
+  }
+
+  .badge {
+    background: var(--green-dark);
+    color: var(--leaf);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+  }
+
+  /* Canvas Grid */
+  .canvas {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 12px;
+  }
+
+  .block {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 18px;
+    border: 1.5px solid rgba(82,183,136,0.2);
+    box-shadow: 0 2px 12px rgba(26,58,42,0.06);
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--accent-bar, var(--green-light));
+    border-radius: 16px 16px 0 0;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .block:nth-child(1) { animation-delay: 0.05s; }
+  .block:nth-child(2) { animation-delay: 0.10s; }
+  .block:nth-child(3) { animation-delay: 0.15s; }
+  .block:nth-child(4) { animation-delay: 0.20s; }
+  .block:nth-child(5) { animation-delay: 0.25s; }
+  .block:nth-child(6) { animation-delay: 0.30s; }
+  .block:nth-child(7) { animation-delay: 0.35s; }
+  .block:nth-child(8) { animation-delay: 0.40s; }
+  .block:nth-child(9) { animation-delay: 0.45s; }
+
+  /* Grid Placements */
+  .key-partners     { grid-column: 1; grid-row: 1 / 3; --accent-bar: #52b788; }
+  .key-activities   { grid-column: 2; grid-row: 1; --accent-bar: #2d6a4f; }
+  .key-resources    { grid-column: 2; grid-row: 2; --accent-bar: #2d6a4f; }
+  .value-prop       { grid-column: 3; grid-row: 1 / 3; --accent-bar: #d4a853; }
+  .customer-rel     { grid-column: 4; grid-row: 1; --accent-bar: #95d5b2; }
+  .channels         { grid-column: 4; grid-row: 2; --accent-bar: #95d5b2; }
+  .customer-seg     { grid-column: 5; grid-row: 1 / 3; --accent-bar: #a07850; }
+  .cost-structure   { grid-column: 1 / 4; grid-row: 3; --accent-bar: #c97b5e; }
+  .revenue-streams  { grid-column: 4 / 6; grid-row: 3; --accent-bar: #52b788; }
+
+  .block-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--earth);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .block-label .icon { font-size: 14px; }
+
+  .block-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(13px, 1.4vw, 17px);
+    font-weight: 700;
+    color: var(--green-dark);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  li {
+    font-size: clamp(10px, 1vw, 12.5px);
+    font-weight: 400;
+    color: var(--text-mid);
+    line-height: 1.45;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent-bar, var(--green-light));
+  }
+
+  /* Value Prop highlight */
+  .value-prop {
+    background: linear-gradient(145deg, #1a3a2a 0%, #2d6a4f 100%);
+    border-color: transparent;
+  }
+
+  .value-prop .block-label { color: var(--leaf); opacity: 0.7; }
+  .value-prop .block-title { color: white; font-size: clamp(14px, 1.6vw, 20px); }
+  .value-prop li { color: rgba(255,255,255,0.85); }
+  .value-prop li::before { background: var(--accent); }
+
+  .value-prop::after {
+    content: '🌱';
+    position: absolute;
+    bottom: 16px; right: 16px;
+    font-size: 40px;
+    opacity: 0.15;
+  }
+
+  /* Bottom row */
+  .cost-structure, .revenue-streams {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .revenue-streams {
+    background: linear-gradient(135deg, #f5f9f7 0%, #e8f5ee 100%);
+    border-color: rgba(82,183,136,0.35);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .canvas {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .key-partners, .value-prop, .customer-seg,
+    .cost-structure, .revenue-streams {
+      grid-column: auto;
+      grid-row: auto;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .canvas { grid-template-columns: 1fr; }
+    header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="logo-area">
+      <div class="leaf-icon">🌿</div>
+      <div>
+        <h1>Pick<span>And</span>Plant</h1>
+        <div class="subtitle">Business Model Canvas</div>
+      </div>
+    </div>
+    <div class="badge">Home Planting Service</div>
+  </header>
+
+  <div class="canvas">
+
+    <!-- Key Partners -->
+    <div class="block key-partners">
+      <div class="block-label"><span class="icon">🤝</span> Key Partners</div>
+      <div class="block-title">Who helps us deliver?</div>
+      <ul>
+        <li>Local nurseries & plant wholesalers</li>
+        <li>Soil & fertilizer suppliers</li>
+        <li>Freelance horticulture experts</li>
+        <li>Ceramic & pot manufacturers</li>
+        <li>E-commerce platforms (Flipkart, Amazon) for supply</li>
+        <li>Delivery & logistics partners</li>
+        <li>Housing societies & apartment associations</li>
+        <li>Interior designers for B2B referrals</li>
+      </ul>
+    </div>
+
+    <!-- Key Activities -->
+    <div class="block key-activities">
+      <div class="block-label"><span class="icon">⚙️</span> Key Activities</div>
+      <div class="block-title">What do we do daily?</div>
+      <ul>
+        <li>Plant selection & sourcing</li>
+        <li>Home visit & space consultation</li>
+        <li>Planting & installation service</li>
+        <li>Aftercare & maintenance scheduling</li>
+        <li>Customer onboarding via website</li>
+        <li>Admin dashboard management</li>
+      </ul>
+    </div>
+
+    <!-- Value Proposition -->
+    <div class="block value-prop">
+      <div class="block-label"><span class="icon">✨</span> Value Proposition</div>
+      <div class="block-title">Why choose PickAndPlant?</div>
+      <ul>
+        <li>End-to-end home planting — pick, plant & maintain</li>
+        <li>Curated plants matched to your space & light</li>
+        <li>Zero effort for the customer — we do it all</li>
+        <li>Affordable tiered plans for every budget</li>
+        <li>Expert guidance on plant care post-installation</li>
+        <li>Greener, healthier living spaces</li>
+        <li>Subscription model for ongoing care</li>
+      </ul>
+    </div>
+
+    <!-- Customer Relationships -->
+    <div class="block customer-rel">
+      <div class="block-label"><span class="icon">💬</span> Customer Relationships</div>
+      <div class="block-title">How do we connect?</div>
+      <ul>
+        <li>Contact form & email follow-ups</li>
+        <li>WhatsApp support & updates</li>
+        <li>Maintenance subscription check-ins</li>
+        <li>Post-service satisfaction surveys</li>
+        <li>Loyalty discounts for repeat clients</li>
+      </ul>
+    </div>
+
+    <!-- Customer Segments -->
+    <div class="block customer-seg">
+      <div class="block-label"><span class="icon">👥</span> Customer Segments</div>
+      <div class="block-title">Who are we serving?</div>
+      <ul>
+        <li>Urban apartment dwellers</li>
+        <li>New homeowners & renters</li>
+        <li>Home décor enthusiasts</li>
+        <li>Offices & co-working spaces</li>
+        <li>Hotels & hospitality venues</li>
+        <li>Gifting — plant gift subscriptions</li>
+        <li>Wellness-focused individuals</li>
+      </ul>
+    </div>
+
+    <!-- Key Resources -->
+    <div class="block key-resources">
+      <div class="block-label"><span class="icon">🧰</span> Key Resources</div>
+      <div class="block-title">What do we need?</div>
+      <ul>
+        <li>Plant inventory & storage space</li>
+        <li>Skilled planting team / staff</li>
+        <li>Website & admin dashboard</li>
+        <li>Tools: pots, soil, fertilizers</li>
+        <li>Transport vehicle for delivery</li>
+        <li>Brand & social media presence</li>
+      </ul>
+    </div>
+
+    <!-- Channels -->
+    <div class="block channels">
+      <div class="block-label"><span class="icon">📣</span> Channels</div>
+      <div class="block-title">How do we reach them?</div>
+      <ul>
+        <li>PickAndPlant website</li>
+        <li>Instagram & Pinterest marketing</li>
+        <li>Google My Business listing</li>
+        <li>Word of mouth & referrals</li>
+        <li>Housing society tie-ups</li>
+        <li>Influencer collaborations</li>
+      </ul>
+    </div>
+
+    <!-- Cost Structure -->
+    <div class="block cost-structure">
+      <div class="block-label"><span class="icon">💸</span> Cost Structure</div>
+      <div class="block-title">What do we spend on?</div>
+      <ul style="flex-direction: row; flex-wrap: wrap; gap: 8px 24px;">
+        <li>Plant procurement & inventory</li>
+        <li>Staff salaries & freelancer fees</li>
+        <li>Transportation & delivery costs</li>
+        <li>Website hosting & domain</li>
+        <li>Marketing & social media ads</li>
+        <li>Tools, pots & planting materials</li>
+        <li>Storage / warehouse rent</li>
+        <li>Customer support operations</li>
+      </ul>
+    </div>
+
+    <!-- Revenue Streams -->
+    <div class="block revenue-streams">
+      <div class="block-label"><span class="icon">💰</span> Revenue Streams</div>
+      <div class="block-title">How do we earn?</div>
+      <ul>
+        <li>One-time planting service packages (Basic → Premium)</li>
+        <li>Monthly maintenance subscriptions</li>
+        <li>Plant & pot retail add-ons</li>
+        <li>Corporate / B2B contracts</li>
+        <li>Plant gifting & hamper orders</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
